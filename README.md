@@ -18,7 +18,7 @@ Basic Usage
 Add the plugin to your webpack config as follows:
 
 ```javascript
-let FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 ...
 
@@ -32,7 +32,7 @@ It can optionally also generate a [JSON file with all information about the icon
 
 If you are using with [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin) it will also inject the necessary html for you:
 
-https://github.com/jantimon/favicons-webpack-plugin/blob/master/test/fixtures/expected/default-with-html/index.html
+https://github.com/jantimon/favicons-webpack-plugin/blob/master/test/fixtures/expected/generate-html/index.html
 
 ```html
   <link rel="apple-touch-icon" sizes="57x57" href="icons-366a3768de05f9e78c392fa62b8fbb80/apple-touch-icon-57x57.png">
@@ -65,8 +65,6 @@ plugins: [
     inject: true,
     // favicon background color (see https://github.com/haydenbleasel/favicons#usage)
     background: '#fff',
-    // favicon app title (see https://github.com/haydenbleasel/favicons#usage)
-    title: 'Webpack App',
 
     // which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
     icons: {
@@ -80,6 +78,23 @@ plugins: [
       twitter: false,
       yandex: false,
       windows: false
+    },
+    manifest: {
+      appName: 'Webpack App',
+      appShortName: null,
+      appDescription: null,
+      developerName: null,
+      developerURL: null,
+      dir: 'auto',
+      lang: 'en-US',
+      background: '#fff',
+      theme_color: '#fff',
+      appleStatusBarStyle: 'black-translucent',
+      display: 'standalone',
+      orientation: 'any',
+      scope: '/',
+      start_url: '/?homescreen=1',
+      version: '1.0'
     }
   })
 ]

@@ -2,8 +2,6 @@
 var childCompiler = require('./lib/compiler.js');
 var assert = require('assert');
 var _ = require('lodash');
-var fs = require('fs');
-var path = require('path');
 
 function FaviconsWebpackPlugin (options) {
   if (typeof options === 'string') {
@@ -31,13 +29,27 @@ function FaviconsWebpackPlugin (options) {
     yandex: false,
     windows: false
   }, this.options.icons);
+  this.options.manifest = _.extend({
+    appName: 'Webpack App',
+    appShortName: null,
+    appDescription: null,
+    developerName: null,
+    developerURL: null,
+    dir: 'auto',
+    lang: 'en-US',
+    background: '#fff',
+    theme_color: '#fff',
+    appleStatusBarStyle: 'black-translucent',
+    display: 'standalone',
+    orientation: 'any',
+    scope: '/',
+    start_url: '/?homescreen=1',
+    version: '1.0'
+  }, this.options.manifest);
 }
 
 FaviconsWebpackPlugin.prototype.apply = function (compiler) {
   var self = this;
-  if (!self.options.title) {
-    self.options.title = guessAppName(compiler.context);
-  }
 
   // Generate the favicons (webpack 4 compliant + back compat)
   var compilationResult;
@@ -87,19 +99,5 @@ FaviconsWebpackPlugin.prototype.apply = function (compiler) {
     });
   }
 };
-
-/**
- * Tries to guess the name from the package.json
- */
-function guessAppName (compilerWorkingDirectory) {
-  var packageJson = path.resolve(compilerWorkingDirectory, 'package.json');
-  if (!fs.existsSync(packageJson)) {
-    packageJson = path.resolve(compilerWorkingDirectory, '../package.json');
-    if (!fs.existsSync(packageJson)) {
-      return 'Webpack App';
-    }
-  }
-  return JSON.parse(fs.readFileSync(packageJson)).name;
-}
 
 module.exports = FaviconsWebpackPlugin;
