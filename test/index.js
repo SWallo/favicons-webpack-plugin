@@ -95,6 +95,24 @@ test('should work together with the html-webpack-plugin', async t => {
   t.is(diffFiles[0], undefined);
 });
 
+test('should work with different file prefix', async t => {
+  const stats = await webpack(baseWebpackConfig([
+    new HtmlWebpackPlugin(),
+    new FaviconsWebpackPlugin({
+      logo: LOGO_PATH,
+      prefix: 'icons/[hash]/',
+      emitStats: true,
+      statsFilename: 'iconstats.json',
+      persistentCache: false
+    })
+  ]));
+  const outputPath = stats.compilation.compiler.outputPath;
+  const expected = path.resolve(__dirname, 'fixtures/expected/generate-prefix');
+  const compareResult = await dircompare.compare(outputPath, expected, compareOptions);
+  const diffFiles = compareResult.diffSet.filter((diff) => diff.state !== 'equal');
+  t.is(diffFiles[0], undefined);
+});
+
 test('should not recompile if there is a cache file', async t => {
   const options = baseWebpackConfig([
     new HtmlWebpackPlugin(),

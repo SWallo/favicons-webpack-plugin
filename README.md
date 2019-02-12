@@ -52,7 +52,7 @@ plugins: [
   new FaviconsWebpackPlugin({
     // Your source logo
     logo: 'my-logo.png',
-    // The prefix for all image files (might be a folder or a name)
+    // The prefix for all image files (only a folder)
     prefix: 'icons-[hash]/',
     // Emit all stats of the generated icons
     emitStats: false,
