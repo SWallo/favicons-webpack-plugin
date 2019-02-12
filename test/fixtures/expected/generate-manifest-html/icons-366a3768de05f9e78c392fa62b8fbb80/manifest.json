@@ -1,11 +1,12 @@
 {
   "name": "Favicon PWA App",
-  "short_name": "Favicon PWA App",
+  "short_name": "Favicon PWA",
   "description": "This is the app description",
   "dir": "auto",
   "lang": "de-DE",
   "display": "standalone",
   "orientation": "landscape",
+  "scope": "/app",
   "start_url": "/app/index",
   "background_color": "#fff",
   "theme_color": "#aaa",

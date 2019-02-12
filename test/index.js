@@ -122,7 +122,7 @@ test('should not recompile if there is a cache file', async t => {
   t.is(diffFiles[0], undefined);
 });
 
-test('should generate the expected manifest.json file with the correct data', async t => {
+test('should generate the expected manifest.json file', async t => {
   const stats = await webpack(baseWebpackConfig(new FaviconsWebpackPlugin({
     logo: LOGO_PATH,
     inject: false,
@@ -181,7 +181,7 @@ test('should generate the expected manifest.json file with the correct data', as
   }
 });
 
-test('should generate the expected manifest.json file with the correct data and inject into html', async t => {
+test('should generate the expected manifest.json file and inject into html', async t => {
   const stats = await webpack(baseWebpackConfig([
     new HtmlWebpackPlugin(),
     new FaviconsWebpackPlugin({
